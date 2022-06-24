@@ -1,0 +1,74 @@
+ALGORITHM problem1
+VAR
+    set1,set2,som : ARRAY_OF INTEGER[10];
+    i,j,k,nb:INTEGER;
+    sum :INTEGER;
+    res:BOOLEAN;
+    ch :STRING ;
+BEGIN
+    
+    sum:=0;
+    ch:="distinct elements:"
+    
+        FOR i FROM 0 TO set1.length-1 STEP 1  DO
+   // recherche de l element dans la 2 eme tableau
+    res:=false;
+    FOR j FROM 0 TO set2.length-1 STEP 1  DO
+        IF (set1[i]=set2[j]) THEN
+            res:=true;BREAK;
+        
+        END_IF
+    END_FOR
+    //si l element est distinct  ajouter sa valeur au tab som
+    IF (res=false) THEN
+        som[k]:=set1[i];
+        k:=k+1;
+    END_IF
+
+END_FOR
+       k:=0;
+       FOR i FROM 0 TO set2.length-1 STEP 1  DO
+   // recherche de l element dans la 1 ere tableau
+    res:=false;
+    FOR j FROM 0 TO set1.length-1 STEP 1  DO
+        IF (set2[i]=set1[j]) THEN
+            res:=true;BREAK;
+        
+        END_IF
+    END_FOR
+    //si l element est distinct  ajouter sa valeur au somme
+     IF (res=false) THEN
+        som[k]:=set2[i];
+        k:=k+1;
+    END_IF
+
+END_FOR
+//supprimer le doublement des elements dans le tableau som
+nb:=som.length-1;
+FOR i FROM 0 TO nb STEP 1  DO
+  FOR j FROM i+1 TO nb  DO
+    IF (som[j]=som[i]) THEN
+       FOR k FROM j TO nb STEP 1  DO 
+        som[k]:=som[k+1];
+        END_FOR
+nb:=nb-1;
+    ELSE
+        j:=j+1;
+    END_IF
+  END_FOR  
+END_FOR
+//calculer le somme des elements distincts
+FOR i FROM 0 TO som.length-1 STEP 1  DO
+    sum:=sum+som[i];
+    ch:=ch.Concat(som[i]);
+    ch:=ch.Concat(" , ");
+END_FOR
+
+
+        //affichage de resultat
+         Write(sum);
+         Write(ch);
+
+
+
+END
